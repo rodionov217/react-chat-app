@@ -1,6 +1,6 @@
 ### Instructions
 
-# `npm dev`
+# `npm run dev`
 Runs the app in the development mode. 
 **To run correctly, change the `socketUrl` variable in App.js from "/" to "http://localhost:3000"**
 
