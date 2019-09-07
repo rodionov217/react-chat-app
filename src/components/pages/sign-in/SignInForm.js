@@ -17,8 +17,7 @@ SignInForm.propTypes = {
   userName: PropTypes.string,
   setUserName: PropTypes.func,
   onSubmit: PropTypes.func,
-  error: PropTypes.string,
-  socket: PropTypes.object.isRequired
+  error: PropTypes.string
 }
 
 export default SignInForm;

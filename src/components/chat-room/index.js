@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 const ChatRoom = props => {
   const {room, user, sendMessage, sendTyping, typing} = props;
   const [showInviteModal, setShowInviteModal] = useState(true);
-  const [showMembers, setShowMembers] = useState(true);
+  const [showMembers, setShowMembers] = useState(false);
 
   return (
     <div className="chat-container">
@@ -24,11 +24,11 @@ const ChatRoom = props => {
           <CloseIcon fontSize="large"/> : 
           <PeopleIcon fontSize="large"/>}
       </label>
-      <input defaultChecked={true} onChange={e => setShowMembers(e.currentTarget.checked)} className="users-switch" type="checkbox" id="users-switch"/>
+      <input value={showMembers} onChange={e => setShowMembers(e.currentTarget.checked)} className="users-switch" type="checkbox" id="users-switch"/>
         
       <div className="people-list" id="people-list">
         <button type="button" onClick={() => setShowInviteModal(true)}>Invite Friends</button>
-        <Members visible={showMembers} list={Object.values(room.users)}/>
+        <Members list={Object.values(room.users)}/>
       </div>
 
       <div className="chat">
@@ -43,7 +43,7 @@ const ChatRoom = props => {
           roomName={room.name} 
           sendMessage={sendMessage}
           sendTyping={sendTyping}
-          />
+        />
       </div>
 
     </div>

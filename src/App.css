@@ -44,14 +44,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-
-
-
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+
 
 body {
   background: linear-gradient(0deg, rgb(193, 194, 193), transparent);
@@ -61,7 +60,6 @@ body {
   min-height: 100vh;
 }
 
-
 .container {
   margin: 0 auto;
   width: 750px;
@@ -69,6 +67,18 @@ body {
   border-radius: 5px;
 }
 
+.wrapper {
+  background: #444753;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+  border-radius: 5px;
+}
+
+
+/* ~~~~~~ MODAL WINDOWS ~~~~~~~~ */
 .modal{
   position: fixed;
   display: flex;
@@ -99,45 +109,6 @@ body {
   font-size: 1rem;
   line-height: 2;
   border-radius: 3px;
-}
-
-
-.chat-container {
-  display: flex;
-  position: relative;
-  border-bottom-left-radius: 3px;
-}
-
-.sign-in-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 500px;
-  height: 300px;
-  padding: 30px;
-
-}
-.sign-in-form label {
-  font-size: 2rem;
-  line-height: 2;
-}
-.sign-in-form input,
-.sign-in-form button {
-  border-radius: 3px;
-  border: 0;
-  outline: none;
-  height: 40px;
-  width: 70%;
-  padding: 10px 20px;
-  font-size: 1rem;
-}
-.sign-in-form button {
-  background-color: #86BB71;
-  text-transform: uppercase;
-  cursor: pointer;
-  color: #ffffff;
-  margin-top: 20px;
 }
 
 .new-chat-modal {
@@ -214,6 +185,41 @@ min-height: 300px;
 }
 
 
+/* ~~~~~~ SIGN IN FORM ~~~~~~~~ */
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 500px;
+  height: 300px;
+  padding: 30px;
+
+}
+.sign-in-form label {
+  font-size: 2rem;
+  line-height: 2;
+}
+.sign-in-form input,
+.sign-in-form button {
+  border-radius: 3px;
+  border: 0;
+  outline: none;
+  height: 40px;
+  width: 70%;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+.sign-in-form button {
+  background-color: #86BB71;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+
+/* ~~~~~~ PEOPLE LIST ~~~~~~~~ */
 .users-button {
   display: none;
   position: absolute;
@@ -290,7 +296,6 @@ min-height: 300px;
   line-height: 30px;
 }
 
-
 .avatar {
   background-color: hotpink;
   border-radius: 50%;
@@ -304,11 +309,18 @@ min-height: 300px;
   font-size: 1.6rem;
 }
 
+
+/* ~~~~~~ CHAT ~~~~~~~~ */
+.chat-container {
+  display: flex;
+  position: relative;
+  border-bottom-left-radius: 3px;
+}
 .chat {
-  width: 490px;
   background: #F2F5F8;
   color: #434651;
   border-bottom-right-radius: 5px;
+  flex-grow: 1;
 }
 .chat .chat-header {
   padding: 20px;
@@ -449,21 +461,25 @@ min-height: 300px;
 }
 
 
-
+/* ~~~~~~~~~~~MEDIA QUERIES~~~~~~~~~~~*/
 @media (max-width: 750px) {
   body{
     padding:0;
   }
-
-  .makeStyles-root-1 {
-    width: 99vw !important;
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
   }
 
   .users-button {
     display: block;
   }
-  .people-list {
+  .users-switch + .people-list {
     display: none;
+  }
+  .users-switch:checked + .people-list {
+    display: block;
   }
   .people-list button {
     margin-top: 50px;
@@ -505,6 +521,10 @@ min-height: 300px;
   .invite-modal input {
     font-size: 1rem;
   }
+
+  .chat-container {
+    height: 93vh;
+  }
   .chat {
     width: 100%;
   }
@@ -530,7 +550,6 @@ min-height: 300px;
     font-size: 1rem;
     line-height: 40px;
   }
-
 }
 
 @media (min-width: 760px) {

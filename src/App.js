@@ -2,21 +2,18 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Chat from './components/pages/chat';
 import SignIn from './components/pages/sign-in';
-
-import io from 'socket.io-client';
 import { USER_CONNECTED, LOGOUT } from './actions/index';
+import io from 'socket.io-client';
 
-const App = props => {
-  const socketUrl = "/";
-  const [socket, setSocket] = useState(null);
+const socketUrl = "/";
+//const socketUrl = "http://localhost:3001/";
+const socket = io(socketUrl);
+socket.on('connect', () => console.log('connected!'));
+
+const App = () => {
   const [user, setUser] = useState(null);
 
-  const initSocket = () => {
-    const socket = io(socketUrl);
-    socket.on('connect', () => console.log('connected!'));
-    setSocket(socket);
-  }
-
+  //Handles the SignIn form submit event. Sets up the new user object.
   /* @param user {id:number, name:string} */
   const setNewUser = user => {
     socket.emit(USER_CONNECTED, user);
@@ -29,15 +26,11 @@ const App = props => {
   }
 
   useEffect(() => {
-    console.log('initSocket');
-    initSocket();
     return () => {
       logout(user)
     }
   // eslint-disable-next-line
   }, []);
-
-  useEffect(() => console.log('APP RENDER'));
 
   return !user ? 
     <SignIn setUser={setNewUser} socket={socket}/> : 

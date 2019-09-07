@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 
 const TabPanel = props => {
-  const { value, index, className } = props;
+  const { value, index } = props;
 
   return (
     <Box 

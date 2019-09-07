@@ -3,46 +3,14 @@ import PropTypes from 'prop-types';
 import { MESSAGE_SENT, MESSAGE_RECIEVED, TYPING, NEW_CHAT, USER_CONNECTED, USER_DISCONNECTED, JOIN_CHAT, JOINED_CHAT, USER_JOINED } from '../../../actions/index';
 
 import ChatRoom from '../../chat-room';
-import { makeStyles } from '@material-ui/core/styles';
 import TabPanel from './TabPanel';
 import ChatTabs from './ChatTabs';
 import Modal from '../../modal';
 import { Snackbar } from './Snackbar';
 import NewChat from '../../modal/NewChat';
-import Video from '../../video';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '750px',
-    margin: '0 auto',
-    background: '#444753',
-    position: 'relative',
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
-    borderRadius: '5px',
-
-  },
-  tabs: {
-    borderTopLeftRadius: '5px',
-    borderTopRightRadius: '5px',
-    boxShadow: 'none',
-  },
-  tabPanel: {
-    backgroundColor: 'transparent'
-  },
-  icon: {
-    cursor: 'pointer',
-    color: '#86BB71',
-    alignSelf: 'center',
-    transition: 'all ease-out 0.5s',
-    '&:hover': {
-      color: 'red'
-    }
-  },
-}));
-
+//import Video from '../../video';
 
 const Chat = props => {
-  const classes = useStyles();
   const { user, socket } = props;
 
   //LOCAL STATE
@@ -77,10 +45,9 @@ const Chat = props => {
 
     socket.on(MESSAGE_RECIEVED, msg => addMessage(msg));
 
-    //socket.on(TYPING, ({chatName, userName, isTyping}) =>  updateTypingUsers({name: userName, chat: chatName}, isTyping ));
-
     socket.on(USER_JOINED, (room, user) => updateUsersInPrivateChat(room, user));
-
+    
+  // eslint-disable-next-line
   }, [chats]);
 
   useEffect(() => {
@@ -179,7 +146,7 @@ const Chat = props => {
   } 
 
   return (
-    <div className={classes.root}>
+    <div className="wrapper">
       <Snackbar user={userToNotice} notice=" has connected" open={showNewUserNotice} setOpen={setShowNewUserNotice}/>
       <Snackbar user={userToNotice} notice=" has disconnected" open={showUserLeftNotice} setOpen={setShowUserLeftLotice}/>
       <Modal
@@ -188,16 +155,14 @@ const Chat = props => {
         <NewChat createNewChat={createNewChat} joinChat={joinChat} error={error}/>
       </Modal>
       <ChatTabs 
-        className={classes.tabs}
         currentRoom={currentRoom}
         setCurrentRoom={setCurrentRoom}
         chats={chats}
-        icon={classes.icon}
         openModal={() => setShowNewChatModal(true)}
       />
       {
         chats.map((room, i) => (
-          <TabPanel key={i} className={classes.tabPanel} value={currentRoom} index={i}>
+          <TabPanel key={i} value={currentRoom} index={i}>
             {/* <Video 
               room={room} 
               user={user}
@@ -213,7 +178,6 @@ const Chat = props => {
           )
         )
       }
-      
     </div>
   )
 }
